@@ -1,0 +1,21 @@
+sudo: false
+language: go
+go:
+- 1.8.x
+install:
+- go get github.com/Masterminds/glide
+before_script:
+- glide install
+script:
+- go build -o bin/consul-monitor main.go
+after_success:
+- xz -9k bin/consul-monitor
+deploy:
+  provider: releases
+  api_key:
+    secure: ff22Fyo1PJKQ7IHxMZ/z8uRhIQKObyTgQSJRcKXJ/dOomoph34TOFGTkkLEUT1cKvsOUww3HuQUqWHxn2C2o8XglAxXflHAC+g2DwJQWYYeudiOb+ezy581tm1fMc/czA2cu7iwYfWSfRmZu3fYONq5dKNxlaopUYBxAk6VUrLrA/nqI0jNSwmULh2V21DospnSa+lF0vkcZCiu4v976SucWENSrh9UI9WDWYm1DZCgJRYjinpnUFZPMkk7NzSX92tHCzovd8dI4/S9i7vBVSrFhD8UAPGwInsmEGRjYW3uPBlHjk2Va/QhtWQ3Yvmpk6OpYrrEGG9kqKK8AWJ4/ItHDTDjo8soN8eV9Zyd051LlMZfn//NvWL1zCuhOy8oNHfmPiMPnFyld8NacLzToehkdUj2i5qzMuIHhrcEhav5mTNTjQMwu8uKegin2opaqK1c1aOm5utdcFFFmFLrO4GwNXfftZWNyLwWtzyh/TXCHPhu5YXBD0vw33z9Qw6oeqFalsDUlYeMKrHzqn7SFQWCPbK0nhC8DuLOp/4ru04dp/QaV4+1ryspjLmoh9DbzAVSplUc8nI0g63RrOzGpmhO5rnXHaWxBzNRGYUWmQ0QZISanzRznwQx1qsC1fjz0VArQc72o7Y5BCqUX7DHy/hqA4HCFXzkV48Ue4tffsnk=
+  file:
+  - bin/consul-monitor
+  - bin/consul-monitor.xz
+  on:
+    tags: true

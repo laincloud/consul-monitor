@@ -1,0 +1,8 @@
+package: github.com/liuxu623/consul-monitor
+import:
+- package: github.com/hashicorp/consul
+  version: ^0.8.5
+  subpackages:
+  - api
+- package: github.com/hashicorp/go-cleanhttp
+- package: github.com/marpaia/graphite-golang

@@ -1,0 +1,20 @@
+hash: 7e1cc3a719c0064e6beb0b543b8dc313ef02c78bb3ac365fc642fb20fe6c05dc
+updated: 2017-07-13T14:01:30.377065679+08:00
+imports:
+- name: github.com/hashicorp/consul
+  version: 2c7715154d8d4568524b76d2d4deb7ca6fd1b285
+  subpackages:
+  - api
+- name: github.com/hashicorp/go-cleanhttp
+  version: 875fb671b3ddc66f8e2f0acc33829c8cb989a38d
+- name: github.com/hashicorp/go-rootcerts
+  version: 6bb64b370b90e7ef1fa532be9e591a81c3493e00
+- name: github.com/hashicorp/serf
+  version: c4c55f16bae1aed9b355ad655d3ebf0215734461
+  subpackages:
+  - coordinate
+- name: github.com/marpaia/graphite-golang
+  version: c474c9b821b4d0a4574edc6412b0003fbce233c4
+- name: github.com/mitchellh/go-homedir
+  version: b8bc1bf767474819792c23f32d8286a45736f1c6
+testImports: []

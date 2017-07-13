@@ -38,10 +38,16 @@ func main() {
 	for {
 		leader, err := consulClient.Status().Leader()
 		if err != nil || len(leader) == 0 {
-			gh.SimpleSend("consul_raft_leader", "0")
+			err = gh.SimpleSend("consul_raft_leader", "0")
+			if err != nil {
+				log.Println(err)
+			}
 		} else {
-			gh.SimpleSend("consul_raft_leader", "1")
+			err = gh.SimpleSend("consul_raft_leader", "1")
+			if err != nil {
+				log.Println(err)
+			}
 		}
-		time.Sleep(time.Second)
+		time.Sleep(10 * time.Second)
 	}
 }

@@ -23,6 +23,7 @@ func init() {
 
 func main() {
 	gh, err := graphite.NewGraphite(graphiteHost, graphitePort)
+	gh.Prefix = "consul"
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -10,20 +10,21 @@ import (
 )
 
 var (
-	graphiteHost, consulAddr string
-	graphitePort             int
+	graphiteHost, consulAddr, hostname string
+	graphitePort                       int
 )
 
 func init() {
-	flag.StringVar(&graphiteHost, "host", "", "graphite host")
-	flag.IntVar(&graphitePort, "port", 2003, "graphite host")
+	flag.StringVar(&graphiteHost, "ghost", "", "graphite host")
+	flag.IntVar(&graphitePort, "gport", 2003, "graphite port")
 	flag.StringVar(&consulAddr, "consul", "127.0.0.1:8500", "consul addr")
+	flag.StringVar(&hostname, "host", "", "hostname")
 	flag.Parse()
 }
 
 func main() {
 	gh, err := graphite.NewGraphite(graphiteHost, graphitePort)
-	gh.Prefix = "consul"
+	gh.Prefix = "consul." + hostname
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -49,6 +50,6 @@ func main() {
 				log.Println(err)
 			}
 		}
-		time.Sleep(10 * time.Second)
+		time.Sleep(time.Minute)
 	}
 }

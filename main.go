@@ -27,11 +27,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	gh, err := graphite.NewGraphite(graphiteHost, graphitePort)
-	gh.Prefix = "consul." + hostname
-	if err != nil {
-		log.Fatal(err)
-	}
 	config := &api.Config{
 		Address:   consulAddr,
 		Scheme:    "http",
@@ -42,6 +37,12 @@ func main() {
 		log.Fatal(err)
 	}
 	for {
+		gh, err := graphite.NewGraphite(graphiteHost, graphitePort)
+		if err != nil {
+			log.Println(err)
+			continue
+		}
+		gh.Prefix = "consul." + hostname
 		leader, err := consulClient.Status().Leader()
 		if err != nil || len(leader) == 0 {
 			err = gh.SimpleSend("consul_raft_leader", "0")
